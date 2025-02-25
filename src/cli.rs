@@ -7,10 +7,6 @@ use clap::{Parser, Subcommand};
 pub struct Cli {
     #[command(subcommand)]
     pub command: Commands,
-
-    /// Password for encryption/decryption
-    #[arg(short, long, hide = true)]
-    pub password: String,
 }
 
 #[derive(Subcommand, Debug)]
