@@ -1,7 +1,7 @@
 # Dechiffrust
 ## Authors 
-Jelidi--Daniel Rayane
-Michel Vincent
+- Jelidi--Daniel Rayane
+- Michel Vincent
 
 ## How to run:
 ```bash
