@@ -12,3 +12,4 @@ dechiffrust encrypt <file to encrypt> -o <name fo the new encrypted file>
 # Decrypt
 dechiffrust decrypt <file to decrypt> -o <directory to which the decrypted files will be sent>
 ```
+The binary will be in /target/release
