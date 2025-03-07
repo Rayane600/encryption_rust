@@ -3,16 +3,21 @@ mod cli;
 
 use clap::Parser;
 use cli::{Cli, Commands};
-use encryption::{encrypt_files, decrypt_files};
+use encryption::{encrypt_files, decrypt_files,pass_strength};
 use std::process;
 use rpassword::prompt_password;
 
+
 fn main() {
     let cli = Cli::parse();
-
+    let mut password = prompt_password("Enter password: ").expect("Failed to read password");
+    let mut strong  = pass_strength(&password);
+    while !strong{
     // Prompt for password securely
-    let password = prompt_password("Enter password: ").expect("Failed to read password");
+    password = prompt_password("Password too weak try again: ").expect("Failed to read password");   
+    strong = pass_strength(&password)
 
+    }
     match &cli.command {
         Commands::Encrypt { input_files, output } => {
             if let Err(e) = encrypt_files(input_files, output, &password) {

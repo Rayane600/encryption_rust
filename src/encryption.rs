@@ -4,6 +4,7 @@ use rand::{Rng, thread_rng};
 use std::fs::{File, create_dir_all};
 use std::io::{Read, Write, BufReader, BufWriter};
 use std::path::Path;
+use zxcvbn::{zxcvbn,Score};
 
 const SALT_SIZE: usize = 16;
 const NONCE_SIZE: usize = 12;
@@ -84,4 +85,9 @@ fn read_u32(cursor: &mut &[u8]) -> Result<u32, std::io::Error> {
     let mut bytes = [0u8; 4];
     cursor.read_exact(&mut bytes)?;
     Ok(u32::from_le_bytes(bytes))
+}
+
+pub fn pass_strength(pass: &str) -> bool{
+    let strength = zxcvbn(pass, &[]).score();
+    !(strength== Score::Zero || strength == Score::One || strength == Score::Two)
 }

@@ -1,6 +1,6 @@
 use clap::{Parser, Subcommand};
 
-/// Arguments de l'interface en ligne de commande
+/// Command line interface arguments
 #[derive(Parser, Debug)]
 #[command(name = "dechiffrust")]
 #[command(about = "Un outil pour chiffrer et déchiffrer des fichiers", long_about = None)]
@@ -11,23 +11,25 @@ pub struct Cli {
 
 #[derive(Subcommand, Debug)]
 pub enum Commands {
-    /// Chiffre plusieurs fichiers
+    /// Encypt multiple files :
+    /// encrypt --output <output_file> <input_files>
     Encrypt {
-        /// Fichiers en entrée à chiffrer
+        /// Input files to encrypt
         #[arg(required = true)]
         input_files: Vec<String>,
 
-        /// Fichier chiffré en sortie
+        /// Encrypted file as output
         #[arg(short, long)]
         output: String,
     },
-    /// Déchiffre un fichier chiffré
+    /// Decrypt an encrypted file :
+    /// decrypt --output <output_dir> <input_file>
     Decrypt {
-        /// Fichier chiffré en entrée
+        /// Encrypted file as input
         #[arg(required = true)]
         input_file: String,
 
-        /// Dossier de sortie pour les fichiers déchiffrés
+        /// Output directory for decrypted files
         #[arg(short, long)]
         output: String,
     },
